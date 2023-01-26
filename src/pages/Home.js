@@ -6,7 +6,7 @@ function Home(props) {
             <header>
                 <div className='logo'>
                     <div className='a-logo'>
-                        <img src={props.home.logo_img} alt={props.home.logo_img}></img>
+                        <img src={props.home} alt={props.home.logo_img}></img>
                     </div>
                 </div>
                 <Nav pages={props.pages}/>

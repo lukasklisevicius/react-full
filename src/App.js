@@ -11,95 +11,163 @@ import './App.css';
 
 function App() {
 
-  const [data,setData] = useState([])
-  const [home,setHome] = useState([])
-  const [video,setVideo] = useState([])
-  const [story,setStory] = useState([])
-  const [menu,setMenu] = useState([])
-  const [projectsPage,setProjectsPage] = useState([])
-  const [projects,setProjects] = useState([])
-  const [contact,setContact] = useState([])
-  const [links,setLinks] = useState([])
+  const [graph,setGraph] = useState([])
+  const [isLoading, setLoading] = useState(true);
+
+  const qr = {query: `
+  query NewQuery {
+    pages {
+      nodes {
+        pageId
+        slug
+      }
+    }
+    pageHome: pageBy(pageId: 39) {
+      pageId
+      slug
+      home_page {
+        logoImg {
+          mediaItemUrl
+        }
+      }
+    }
+    pageVideo: pageBy(pageId: 120) {
+      pageId
+      slug
+      video_page {
+        videoMobile {
+          mediaItemUrl
+        }
+        videoDesktop {
+          mediaItemUrl
+        }
+      }
+    }
+    pageStory: pageBy(pageId: 99) {
+      pageId
+      slug
+      full_story_page {
+        titleLight
+        titleBold
+        text1
+        text2
+      }
+    }
+    pageMenu: pageBy(pageId: 101) {
+      pageId
+      slug
+      menu_page {
+        titleLight
+        titleBold
+        header1
+        header1About
+        header2
+        header2About
+        header3
+        header3About
+        header4
+        header4About
+        header5
+        header5About
+        header6
+        header6About
+        header7
+        header7About
+        header8
+        header8About
+        header9
+        header9About
+      }
+    }
+    pageProjects: pageBy(pageId: 103) {
+      pageId
+      slug
+      project_page {
+        titleLight
+        titleBold
+      }
+    }
+    pageContact: pageBy(pageId: 105) {
+      pageId
+      slug
+      contacts_page {
+        titleLight
+        titleBold
+        pageName
+        pageEmail
+        person1Name
+        person2Name
+        person3Name
+        person1Phone
+        person2Phone
+        person3Phone
+        facebookLink
+        instagramLink
+        linkedinLink
+        copyrights
+      }
+    }
+    posts {
+      nodes {
+        postId
+        project_post {
+          projectTitle
+          shortDescription
+          linkToPage
+          tag1
+          tag2
+          tag3
+          tag4
+          tag5
+          tag6
+          image {
+            mediaItemUrl
+          }
+        }
+      }
+    }
+  }
+  `}
+
+
+  const getData = () =>{
+    fetch('http://localhost/fullAgency/wordpress/graphql',{
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify(qr),
+    })
+    .then(res => res.json())
+    .then(data =>{setGraph(data.data);setLoading(false)})
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
 
 
   useEffect(()=>{
-      fetch('http://localhost/fullAgency/wordpress/wp-json/wp/v2/pages')
-      .then(res => res.json())
-      .then(data => {setData(data)})
-      .catch((err) => {
-        console.log(err);
-      });
-
-      fetch('http://localhost/fullAgency/wordpress/wp-json/wp/v2/pages/39?acf_format=standard')
-      .then(res => res.json())
-      .then(data => {setHome(data.acf)})
-      .catch((err) => {
-        console.log(err);
-      });
-
-      fetch('http://localhost/fullAgency/wordpress/wp-json/wp/v2/pages/120?acf_format=standard')
-      .then(res => res.json())
-      .then(data => {setVideo(data.acf)})
-      .catch((err) => {
-        console.log(err);
-      });
-
-      fetch('http://localhost/fullAgency/wordpress/wp-json/wp/v2/pages/99?acf_format=standard')
-      .then(res => res.json())
-      .then(data => {setStory(data.acf)})
-      .catch((err) => {
-        console.log(err);
-      });
-
-      fetch('http://localhost/fullAgency/wordpress/wp-json/wp/v2/pages/101?acf_format=standard')
-      .then(res => res.json())
-      .then(data => {setMenu(data.acf)})
-      .catch((err) => {
-        console.log(err);
-      });
-
-      fetch('http://localhost/fullAgency/wordpress/wp-json/wp/v2/pages/103?acf_format=standard')
-      .then(res => res.json())
-      .then(data => {setProjectsPage(data.acf)})
-      .catch((err) => {
-        console.log(err);
-      });
-
-      fetch('http://localhost/fullAgency/wordpress/wp-json/wp/v2/posts?acf_format=standard')
-      .then(res => res.json())
-      .then(data =>{ setProjects(data)})
-      .catch((err) => {
-        console.log(err);
-      });
-
-      fetch('http://localhost/fullAgency/wordpress/wp-json/wp/v2/pages/105?acf_format=standard')
-      .then(res => res.json())
-      .then(data => {setContact(data.acf)})
-      .catch((err) => {
-        console.log(err);
-      });
-
-      fetch('http://localhost/fullAgency/wordpress/wp-json/wp/v2/pages/105?acf_format=standard')
-      .then(res => res.json())
-      .then(data => {setLinks(data.acf)})
-      .catch((err) => {
-        console.log(err);
-      });
-
-
+    getData()
   },[])
+  
+  // console.log(graph.pageContact.contacts_page)
 
+  if(isLoading){return(<div>loading</div>)}
   return (
+    
     <>
-        <Home home={home} pages={data}/>
-        <Video video={video}/>
-        <Story story={story}/>
-        <Menu menu={menu}/>
-        <Projects projectsPage={projectsPage} projects={projects}/>
-        <Contact contact={contact}/>
-        <Footer links={links} />
+
+    
+        <Home home={graph.pageHome.home_page.logoImg.mediaItemUrl} pages={graph.pages.nodes}/>
+        <Video video={graph.pageVideo.video_page}/>
+        <Story story={graph.pageStory.full_story_page}/>
+        <Menu menu={graph.pageMenu.menu_page}/>
+        <Projects projectsPage={graph.pageProjects.project_page} projects={graph.posts.nodes}/>
+        <Contact contact={graph.pageContact.contacts_page}/>
+        <Footer links={graph.pageContact.contacts_page} />
     </>
-  );
-}
+  );}
+
 
 export default App;

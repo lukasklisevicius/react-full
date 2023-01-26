@@ -11,9 +11,9 @@ function Footer(props) {
             <div style={{maxWidth:'900px'}}>
                 <div className='con'>
                     <ul>
-                        <li><a href={props.links.facebook_link}><FontAwesomeIcon icon={faFacebook} /></a></li>
-                        <li><a href={props.links.instagram_link}><FontAwesomeIcon icon={faCircle}/><FontAwesomeIcon icon={faInstagram} style={{color:'#000',position:'absolute',fontSize:'2rem'}}></FontAwesomeIcon></a></li>
-                        <li><a href={props.links.linkedin_link}><FontAwesomeIcon icon={faCircle}/><FontAwesomeIcon icon={faLinkedinIn} style={{color:'#000',position:'absolute',fontSize:'2rem'}}></FontAwesomeIcon></a></li>
+                        <li><a href={props.links.facebookLink}><FontAwesomeIcon icon={faFacebook} /></a></li>
+                        <li><a href={props.links.instagramLink}><FontAwesomeIcon icon={faCircle}/><FontAwesomeIcon icon={faInstagram} style={{color:'#000',position:'absolute',fontSize:'2rem'}}></FontAwesomeIcon></a></li>
+                        <li><a href={props.links.linkedinLink}><FontAwesomeIcon icon={faCircle}/><FontAwesomeIcon icon={faLinkedinIn} style={{color:'#000',position:'absolute',fontSize:'2rem'}}></FontAwesomeIcon></a></li>
                     </ul>
                 </div>
                 <div className='copyrights'>

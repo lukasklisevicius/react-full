@@ -5,7 +5,7 @@ function Menu(props) {
 
     return (
         <section id='menu'>
-            <h1 className='head wd'><span>{props.menu.title_light} </span>{props.menu.title_bold}</h1>
+            <h1 className='head wd'><span>{props.menu.titleLight} </span>{props.menu.titleBold}</h1>
             <div className='wedo-text text'>
                 <p>
                     <span className='bold btn-1'>{props.menu.header1} </span>
