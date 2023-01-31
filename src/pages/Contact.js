@@ -1,33 +1,25 @@
+import Contactemail from "../parts/Contactemail";
+import Contactname from "../parts/Contactname";
+import Header from "../parts/Header";
 
 
 function Contact(props) {
 
 
     return (
+        <>
         <div className='black'>
             <section id="contact">
-                <h1 className='head ct'><span>{props.contact.titleLight} </span>{props.contact.titleBold}</h1>
+                <Header light={props.contact.titleLight} bold={props.contact.titleBold}/>
                 <div className='table'>
-                    <div className='email'>
-                        <h3>{props.contact.pageName}</h3>
-                        <a href={`mailto:${props.contact.pageEmail}`}>{props.contact.pageEmail}</a>
-                    </div>
-                    <div className='name'>
-                        <p>{props.contact.person1Name}</p>
-                        <a href={`tel:${props.contact.person1Phone}`}>{props.contact.person1Phone}</a>
-                    </div>
-                    <div className='name'>
-                        <p>{props.contact.person2Name}</p>
-                        <a href={`tel:${props.contact.person2Phone}`}>{props.contact.person1Phone}</a>
-                    </div>
-                    <div className='name'>
-                        <p>{props.contact.person3Name}</p>
-                        <a href={`tel:${props.contact.person3Phone}`}>{props.contact.person1Phone}</a>
-                    </div>
+                    <Contactemail name={props.contact.pageName} email={props.contact.pageEmail}/>
+                    <Contactname name={props.contact.person1Name} phone={props.contact.person1Phone}/>
+                    <Contactname name={props.contact.person2Name} phone={props.contact.person2Phone}/>
+                    <Contactname name={props.contact.person3Name} phone={props.contact.person3Phone}/>
                 </div>
             </section>
         </div>
-
+        </>
     );
   }
   

@@ -1,12 +1,16 @@
 import Nav from "../components/Nav";
+import { useInView } from 'react-intersection-observer';
+
 
 function Home(props) {
 
+    const { ref: myRef, inView: myElementIsVisible } = useInView();
+
     return (
-            <header>
+            <header ref={myRef}>
                 <div className='logo'>
                     <div className='a-logo'>
-                        <img src={props.home} alt={props.home.logo_img}></img>
+                        <img style={{scale:0.7}} className={`${myElementIsVisible? 'appear': ''}`} src={props.home} alt={props.home.logo_img}></img>
                     </div>
                 </div>
                 <Nav pages={props.pages}/>

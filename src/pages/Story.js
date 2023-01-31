@@ -1,18 +1,17 @@
+import Header from "../parts/Header";
+import Storytext from "../parts/Storytext";
 
 
 function Story(props) {
-
-
     return (
+        <>
         <div className='black'>
             <section id='story'>
-                <h1 className='head sh'><span>{props.story.titleLight} </span>{props.story.titleBold}</h1>
-                <div className='text'>
-                    <p>{props.story.text1}</p>
-                    <p>{props.story.text2}</p>
-                </div>
+                <Header light={props.story.titleLight} bold={props.story.titleBold}/>
+                <Storytext text1={props.story.text1} text2={props.story.text2}/>
             </section>
         </div>
+        </>
     );
   }
   

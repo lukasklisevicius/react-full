@@ -1,21 +1,31 @@
+import Border from "../parts/Border";
+import Projecthead from "../parts/Projecthead";
+import Projectimg from "../parts/Projectimg";
+import Projecttag from '../parts/Projecttag'
+import { useInView } from 'react-intersection-observer';
+
+
 
 function Project(props) {
+const { ref: myRef, inView: myElementIsVisible } = useInView();
+const handleClick = (url) => {
+    window.open(url, '_blank', 'noreferrer');
+}
+
+    
     return (
-            <div key={props.project.id} className="project" id={props.project.id} onClick={window.open(`${props.project.linkToPage}`,'_blank')}>
+        <>
+            <div onClick={() =>handleClick(props.project.linkToPage)} key={props.project.id} ref={myRef}  className={`project ${myElementIsVisible?'appear-media':''}`} id={props.project.id} >
                 <div className='project-text'>
-                    <h3 className='project-name'>{props.project.projectTitle}</h3>
-                            <p>#{props.project.tag1}</p>
-                            <p>#{props.project.tag2}</p>
-                            <p>#{props.project.tag3}</p>
-                            <p>#{props.project.tag4}</p>
-                            <p>#{props.project.tag5}</p>
-                            <p>#{props.project.tag6}</p>
+                    <Projecthead title={props.project.projectTitle}/>
+                        {props.tags.map(tag =>{
+                            return(<Projecttag key={tag.node.tagId} slug={tag.node.slug}/>)
+                        })}
                         </div>
-                        <div className='project-img'>
-                            <img src={props.project.image.mediaItemUrl} alt={props.project.image.mediaItemUrl}></img>
-                        </div>
-                        <p>{props.project.shortDescription}</p>
-                    </div>  
+                        <Projectimg src={props.project.image.mediaItemUrl} alt={props.project.imgAlt}/>
+                </div> 
+            <Border />
+        </>
     )
   }
   

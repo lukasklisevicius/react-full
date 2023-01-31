@@ -186,6 +186,7 @@ header nav {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
+  opacity: 1;
 }
 
 header nav ul {
@@ -205,6 +206,7 @@ header nav ul {
 
 header nav ul li {
   list-style: none;
+  opacity: 0;
 }
 
 header nav ul li a {
@@ -377,7 +379,7 @@ section#projects .project .project-text {
 }
 
 section#projects .project .project-text p {
-  margin: 4% 0;
+  margin: 1% 0;
 }
 
 section#projects .project .project-text h3 {
@@ -505,6 +507,78 @@ footer div .copyrights{
   align-items: center;
   justify-content: center;
 }
+
+.border:last-child{
+  display: none;
+}
+
+.slide-in{
+  animation-name: opacity-slide;
+  animation-duration: 1.5s;
+}
+
+.appear-media{
+  animation-name: opacity-scale;
+  animation-duration: 2s;
+}
+
+
+.apper-media-img{
+  animation-name: opacity-scale;
+  animation-duration: 2s;
+}
+
+.appear{
+  animation: opacity 2s forwards;
+}
+
+.li{
+  animation: opacity-top 0.5s forwards;
+}
+
+/* .appear-link{
+  animation: opacity 2s forwards;
+  animation-delay: 0.5s;
+} */
+
+.li:nth-child(1){animation-delay: 0.2s;}
+.li:nth-child(2){animation-delay: 0.4s;}
+.li:nth-child(3){animation-delay: 0.6s;}
+.li:nth-child(4){animation-delay: 0.8s;}
+
+/* .fixed{
+  position: fixed;
+  top: 0;
+} */
+
+@keyframes opacity-slide{
+  from {opacity: 0; transform: translateX(-300px);}
+  to {opacity: 1;}
+}
+
+@keyframes opacity-scale {
+  from{opacity:0; transform: scale(0.99);}
+  to{opacity:1;transform: scale(1);}
+  
+}
+
+@keyframes opacity-scale-logo {
+  from{opacity:0; transform: scale(0.7);}
+  to{opacity:1;transform: scale(1);}
+  
+}
+
+@keyframes opacity {
+  from{opacity:0;}
+  to{opacity:1;}
+}
+
+@keyframes opacity-top {
+  from{opacity:0; transform: translateY(-20px);}
+  to{opacity:1;}
+}
+
+
 
 
 @media only screen and (max-width: 1200px) {

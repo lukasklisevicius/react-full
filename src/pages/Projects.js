@@ -1,12 +1,17 @@
 import Project from '../components/Project'
+import Header from '../parts/Header';
+
+
+
 
 function Projects(props) {
 const arr = props.projects
+
     return (
         <section id='projects'>
-            <h1 className='head pr'><span>{props.projectsPage.titleLight} </span>{props.projectsPage.titleBold}</h1>
+            <Header light={props.projectsPage.titleLight} bold={props.projectsPage.titleBold}/>
             {arr.map(project =>{
-                return(<Project key={[project.postId]} project={project.project_post}></Project>)
+                return(<Project key={[project.postId]} tags={project.tags.edges} project={project.project_post}></Project>)
             }
             )}
         </section>
